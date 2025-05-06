@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Plombier à Bordeaux - A L'EAU RULLEAU 33{% endblock %}
+{% block meta_description %}
+Formulaire de contact pour demander un devis ou une intervention rapide en plomberie à Bordeaux et en Gironde. Réponse rapide assurée.
+{% endblock %}
+{% block og_title %}Contactez A L'EAU RULLEAU 33 – Plombier à Bordeaux{% endblock %}
+{% block og_description %}Envoyez-nous un message ou appelez le 06 82 08 35 22. Intervention rapide sur Bordeaux et alentours.{% endblock %}
+
+
+
+
+{% block body %}
+<div id="contact">
+    <h1 class="visually-hidden">Formulaire de contact pour demander un devis ou une intervention rapide en plomberie à Bordeaux</h1>
+    <h2>Demander un devis ou une intervention en plomberie à Bordeaux</h2>
+
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+
+    <p class="contact-intro">
+        Vous avez une question, besoin d’un devis ou d’un dépannage urgent ? 
+        Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.
+        Nous intervenons sur Bordeaux et ses alentours.
+    </p>
+    
+    <form method="post">
+        {{ form_start(formulaire) }}
+         
+
+        {% for field in formulaire %}
+        
+        {% if field.vars.name != '_token' and field.vars.name != 'envoyer' and field.vars.name != 'honeypot' %} 
+                <div>
+                    {{ form_label(field) }}
+                    {{ form_widget(field, { 'attr': {'class': 'form-control'} }) }}
+                    
+
+                    {{ form_errors(field) }}
+                    
+                    
+
+                 </div>
+            {% endif %}
+        {% endfor %}
+
+        {{ form_rest(formulaire) }} 
+
+        {{ form_end(formulaire) }}
+    </form>
+
+
+</div>
+{% endblock %}

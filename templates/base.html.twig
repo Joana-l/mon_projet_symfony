@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}A L'EAU RULLEAU 33 - Artisan local{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="{{ asset('images/og-image.webp') }}">
+    <meta property="og:site_name" content="A L'EAU RULLEAU 33">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#1a73e8">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="{{ app.request.uri }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Barre de navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <img src="{{ asset('images/logo2.webp')}}" alt="Logo du plombier A L'EAU RULLEAU 33, Bordeaux">
+
+                <span class="company-name">A L'EAU RULLEAU 33</span>
+            </div>
+            <button class="burger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="{{ path('homepage') }}">Accueil</a>
+                <a href="{{ path('services') }}">Services</a>
+                <a href="{{ path('realisations') }}">Réalisations</a>
+                <a href="{{ path('contact') }}">Contact</a>
+
+            </div>
+
+
+        </nav>
+    </header>
+
+    <!-- Contenu dynamique de chaque page -->
+    <main>
+        {% block body %}
+        <h1 class="visually-hidden">Bienvenue chez A L'EAU RULLEAU 33</h1>
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>A L'EAU RULLEAU 33</h3>
+                <p>📍 Saint-Germain-du-Puch, France</p>
+                <p>📞 06 82 08 35 22</p>
+                <p>✉️ aleaurulleau33@hotmail.com</p>
+            </div>
+            <div class="footer-links">
+                <a href="/">Accueil</a>
+                <a href="/services">Nos Services</a>
+
+                <a href="{{ path('contact') }}">Contact</a>
+                <a href="{{ path('mention') }}">Mentions Légales</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank">📘 Facebook</a>
+                <a href="https://instagram.com" target="_blank">📸 Instagram</a>
+            </div>
+        </div>
+        <p class="footer-copy"> 2024 A L'EAU RULLEAU 33 - Tous droits réservés</p>
+    </footer>
+    <div class="contact-info">
+        Contactez-nous au 06.82.08.35.22 - aleaurulleau33@hotmail.com
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const burger = document.querySelector(".burger");
+            const nav = document.querySelector(".nav-links");
+
+            if (burger && nav) {
+                burger.addEventListener("click", function () {
+
+                    nav.classList.toggle("open");
+
+                });
+            }
+
+
+        });
+    </script>
+
+</body>
+
+</html>

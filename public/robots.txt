@@ -1,0 +1,20 @@
+# Autoriser tous les moteurs de recherche
+User-agent: *
+# ⚠️ En production, penser à remplacer 127.0.0.1 par le vrai domaine
+
+# Interdire les dossiers techniques
+Disallow: /config/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /translations/
+Disallow: /vendor/
+Disallow: /var/
+Disallow: /tests/
+Disallow: /bin/
+Disallow: /assets/
+
+# Autoriser les routes publiques (gérées via Symfony)
+Allow: /
+
+# Lien vers le sitemap XML (à personnaliser selon ton domaine réel)
+Sitemap: http://127.0.0.1:8015/sitemap

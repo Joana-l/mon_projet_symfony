@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Réalisations Plombier à Bordeaux - A L'EAU RULLEAU 33{% endblock %}
+{% block meta_description %}
+Découvrez les réalisations de notre entreprise de plomberie à Bordeaux : rénovations, installations, dépannages. Un savoir-faire local depuis plus de 15 ans.
+{% endblock %}
+{% block og_title %}Exemples de réalisations A L'EAU RULLEAU 33{% endblock %}
+{% block og_description %}Inspirez-vous de nos rénovations de salle de bains, remplacement de chauffe-eau, volets roulants solaires et plus.{% endblock %}
+
+{% block body %}
+    
+    <h1 class="page-title">NOS RÉALISATIONS</h1>
+    <h1 class="visually-hidden">Nos réalisations de plomberie à Bordeaux</h1>
+    <div class="realisation-container">
+        {% for realisation in realisations %}
+            <div class="realisation {% if loop.index is odd %}realisation-left{% else %}realisation-right{% endif %}">
+                {% if loop.index is odd %}
+                    <div class="realisation-text">
+                        <h2>{{ realisation.titre }}</h2>
+                        <p>{{ realisation.description|raw }}</p>
+                    </div>
+                    <div class="realisation-image">
+                        <img src="{{ asset('uploads/realisation/' ~ realisation.image) }}" alt="{{ realisation.titre }}">
+                    </div>
+                {% else %}
+                    <div class="realisation-image">
+                        <img src="{{ asset('uploads/realisation/' ~ realisation.image) }}" alt="{{ realisation.titre }}">
+                    </div>
+                    <div class="realisation-text">
+                        <h2>{{ realisation.titre }}</h2>
+                        <p>{{ realisation.description|raw }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="no-realisations">Aucune réalisation trouvée.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

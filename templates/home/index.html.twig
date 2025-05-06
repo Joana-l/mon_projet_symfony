@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil Plombier à Bordeaux - A L'EAU RULLEAU 33{% endblock %}
+{% block meta_description %}
+Plombier à Bordeaux – A L'EAU RULLEAU 33 vous accompagne pour vos travaux : dépannage, rénovation, fuites, chauffe-eau,
+salle de bain. Intervention rapide en Gironde.
+{% endblock %}
+{% block og_title %}Plombier Bordeaux – Dépannage en 30min{% endblock %}
+{% block og_description %}Faites appel à A L'EAU RULLEAU 33 pour vos urgences plomberie, fuites, chauffe-eau et rénovations à Bordeaux et alentours.{% endblock %}
+
+{% block body %}
+<section class="hero">
+
+    <div class="hero-content">
+        <h1 class="visually-hidden">Plombier à Bordeaux – Dépannage, rénovation & installation | A L'EAU RULLEAU 33</h1>
+        <div class="experience">Plus de 15 ans d'expertise en plomberie à votre service ! Fiabilité, rapidité et
+            savoir-faire pour tous vos besoins en plomberie.</div>
+        <p class="hero-description">
+            Nous accompagnons particuliers et professionnels dans tous leurs travaux d’installation, de dépannage et
+            d’entretien.
+            Notre mission est d’offrir des services fiables, rapides et de haute qualité, adaptés à vos besoins.
+        </p>
+
+        <a href="{{ path('contact') }}" class="hero-button">Demander un devis gratuit</a>
+    </div>
+</section>
+
+<!-- NOUVELLE SECTION : Pourquoi nous choisir ? -->
+<section class="why-choose-us">
+    <h2>Pourquoi choisir A L'EAU RULLEAU 33 ?</h2>
+    <div class="why-grid">
+        <div class="why-item">
+            <h3>🔧 Expertise certifiée</h3>
+            <p>Nos artisans qualifiés possèdent plus de 15 ans d’expérience et sont formés aux dernières techniques de
+                plomberie et rénovation.</p>
+        </div>
+        <div class="why-item">
+            <h3>⚡ Intervention rapide</h3>
+            <p> Nous intervenons en urgence pour tous vos besoins de dépannage.</p>
+        </div>
+        <div class="why-item">
+            <h3>💎 Qualité et garantie</h3>
+            <p>Nous utilisons des matériaux de qualité et garantissons nos travaux pour votre tranquillité d’esprit.</p>
+        </div>
+        <div class="why-item">
+            <h3>📍 Service local</h3>
+            <p>Basés à Bordeaux en Gironde, nous intervenons dans un rayon de 50 km incluant Mérignac, Talence, Bègles,
+                Gradignan, Pessac, Villenave-d'Ornon et les communes environnantes.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="services" id="services">
+    <h2>Nos Services de plomberie à Bordeaux</h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <h3>🔧Plomberie</h3>
+            <p>Installation, réparation et maintenance de vos systèmes de plomberie</p>
+        </div>
+        <div class="service-card">
+            <h3>Vitrage</h3>
+            <p>Remplacement et installation de vitrages</p>
+        </div>
+        <div class="service-card">
+            <h3>🌞Volet Roulant solaires</h3>
+            <p>Installation et réparation de volets roulants</p>
+        </div>
+        <div class="service-card">
+            <h3>🔑Serrurerie</h3>
+            <p>La sécurité de votre habitation ou de vos locaux est primordiale</p>
+        </div>
+        <div class="service-card">
+            <h3>🚿Rénovation salle de bains</h3>
+            <p>Faites de votre salle de bains un espace agréable et fonctionnel</p>
+        </div>
+        <div class="service-card">
+            <h3>💧Recherches de fuites</h3>
+            <p>Recherche et Détection de Fuites</p>
+        </div>
+        <div class="service-card">
+            <h3>Débouchage</h3>
+            <p>Débouchage rapide et efficace pour tous vos problèmes d'évacuation</p>
+        </div>
+        <div class="service-card">
+            <h3>🔍Inspection caméra</h3>
+            <p>Inspection complète des canalisations par caméra endoscopique</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- NOUVELLE SECTION : Témoignages Clients -->
+<section class="testimonials">
+    <h2>Ils nous ont fait confiance</h2>
+    <div class="elfsight-widget">
+
+        <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+        <script src="https://static.elfsight.com/platform/platform.js" async></script>
+        <div class="elfsight-app-95475d38-a2be-437d-ad25-9b51883a5800" data-elfsight-app-lazy>
+        </div>
+        <div class="testimonial-call">
+            <p>Vous aussi, partagez votre expérience avec A L'EAU RULLEAU 33 !</p>
+            <a href="https://g.co/kgs/da1S4yn" target="_blank" rel="noopener" class="button">Laisser un avis sur
+                Google</a>
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}
