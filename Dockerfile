@@ -1,6 +1,5 @@
 FROM php:8.2-apache-bullseye
 
-# Ajout du paquet PostgreSQL nécessaire
 RUN apt-get update && apt-get install -y \
     git unzip libicu-dev libzip-dev libpq-dev \
     && docker-php-ext-install intl pdo pdo_pgsql zip \
@@ -16,6 +15,11 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
+# Crée le dossier var manuellement
+RUN mkdir -p var
+
+# Applique les bons droits
 RUN chown -R www-data:www-data var vendor
 
 EXPOSE 80
+
