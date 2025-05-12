@@ -14,7 +14,7 @@ COPY . .
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN composer install --no-dev --prefer-dist --no-interaction
+RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
 RUN chown -R www-data:www-data var vendor
 
