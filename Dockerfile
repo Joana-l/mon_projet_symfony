@@ -1,36 +1,29 @@
-# Étape 1 : Builder avec composer uniquement les vendors
-FROM composer:2 AS vendor
-
-WORKDIR /app
-
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction
-
-# Étape 2 : PHP + Apache
+# Image de base avec Apache
 FROM php:8.2-apache-bullseye
 
-# Installe les dépendances système + extensions PHP
+# Installe les extensions PHP nécessaires
 RUN apt-get update && apt-get install -y \
     git unzip libicu-dev libzip-dev \
     && docker-php-ext-install intl pdo pdo_pgsql zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Active mod_rewrite pour Apache (obligatoire avec Symfony)
+# Active mod_rewrite pour Symfony
 RUN a2enmod rewrite
 
-# Copie le projet dans le container
+# Crée le dossier de travail
 WORKDIR /var/www/html
+
+# Copie tout le code Symfony dans le conteneur
 COPY . .
 
-# Copie les vendors depuis l’étape précédente
-COPY --from=vendor /app/vendor /var/www/html/vendor
+# Installe Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Installe les dépendances Symfony (une fois que le code est là)
+RUN composer install --no-dev --prefer-dist --no-interaction
 
 # Met les bons droits
 RUN chown -R www-data:www-data var vendor
 
-# Pas de cache:clear ici ! Symfony le fera automatiquement au premier accès.
-
-# Port exposé
+# Expose le port HTTP
 EXPOSE 80
-
-
