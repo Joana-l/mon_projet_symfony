@@ -9,16 +9,16 @@ RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
+# 👉 Redirige Apache vers le dossier public (Symfony)
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
 COPY . .
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
-# Crée le dossier var manuellement
 RUN mkdir -p var
-
-# Applique les bons droits
 RUN chown -R www-data:www-data var vendor
 
 EXPOSE 80
