@@ -27,6 +27,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # ✅ Installation safe (sans scripts auto)
 RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
+COPY post-deploy.sh /post-deploy.sh
+RUN chmod +x /post-deploy.sh && /post-deploy.sh
+
+
 # Créer le dossier var pour les caches et logs
 RUN mkdir -p var
 RUN chown -R www-data:www-data var vendor
