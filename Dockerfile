@@ -9,8 +9,15 @@ RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
-# 👉 Redirige Apache vers le dossier public (Symfony)
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# 👉 Écrase complètement la config Apache
+RUN echo '<VirtualHost *:80>
+    DocumentRoot /var/www/html/public
+    <Directory /var/www/html/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
 COPY . .
 
