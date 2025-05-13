@@ -9,7 +9,7 @@ RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
-# Config Apache pour servir le bon dossier Symfony
+# Config Apache
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
@@ -23,8 +23,11 @@ COPY . .
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# ✅ NE PAS désactiver les scripts pour que Symfony fonctionne !
-RUN composer install --no-dev --prefer-dist --no-interaction
+# ❌ Pas de scripts auto
+RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
+
+# ✅ Manuellement : cache clear
+RUN php bin/console cache:clear --env=prod --no-warmup
 
 RUN mkdir -p var
 RUN chown -R www-data:www-data var vendor
