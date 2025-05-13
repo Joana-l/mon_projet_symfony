@@ -9,7 +9,7 @@ RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
-# 👉 Écrase complètement la config Apache
+# 👉 Configuration Apache minimale pour Symfony
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
@@ -19,15 +19,16 @@ RUN echo '<VirtualHost *:80>\n\
     </Directory>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-
 COPY . .
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
+# ❌ ENLÈVE --no-scripts
+RUN composer install --no-dev --prefer-dist --no-interaction
 
 RUN mkdir -p var
 RUN chown -R www-data:www-data var vendor
 
 EXPOSE 80
+
 
