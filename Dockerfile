@@ -26,10 +26,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # ❌ Pas de scripts auto
 RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
-# ✅ Manuellement : cache clear
-RUN php bin/console cache:clear --env=prod --no-warmup
 
 RUN mkdir -p var
 RUN chown -R www-data:www-data var vendor
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 
 EXPOSE 80
