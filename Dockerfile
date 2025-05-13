@@ -9,7 +9,7 @@ RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
-# 👉 Configuration Apache minimale pour Symfony
+# 👉 Config minimale d’Apache pour Symfony
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
@@ -21,14 +21,17 @@ RUN echo '<VirtualHost *:80>\n\
 
 COPY . .
 
+# Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# ❌ ENLÈVE --no-scripts
-RUN composer install --no-dev --prefer-dist --no-interaction
+# ✅ Installation safe (sans scripts auto)
+RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
+# Créer le dossier var pour les caches et logs
 RUN mkdir -p var
 RUN chown -R www-data:www-data var vendor
 
 EXPOSE 80
+
 
 
