@@ -1,12 +1,18 @@
 #!/bin/bash
-
 set -e
 
-# Lancer le cache:clear au démarrage si possible
+echo "🚀 Entrypoint Symfony : démarrage..."
+
+# Force les variables d'environnement si besoin
+export APP_ENV=prod
+export APP_DEBUG=0
+
+# Lancer le cache:clear
 if [ -f /var/www/html/bin/console ]; then
-    echo "🎯 Clearing Symfony cache..."
-    php /var/www/html/bin/console cache:clear --env=prod --no-warmup || true
+  echo "🎯 Symfony détecté, on nettoie le cache..."
+  php /var/www/html/bin/console cache:clear --env=prod --no-warmup || true
 fi
 
-# Lancer Apache
-apache2-foreground
+# Démarrer Apache
+echo "🌐 Lancement d'Apache..."
+exec apache2-foreground
