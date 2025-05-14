@@ -4,7 +4,6 @@
 
 return array (
   'APP_ENV' => 'prod',
-  'SYMFONY_DOTENV_PATH' => './.env',
   'APP_DEBUG' => '1',
   'DATABASE_URL' => 'postgresql://symfony_db_user:0xco7Vm2gv6B6vReyx4zG9SVKhSOuJQ4@dpg-d0gv67k9c44c7395ug0g-a/symfony_db',
   'MESSENGER_TRANSPORT_DSN' => 'doctrine://default?auto_setup=0',
