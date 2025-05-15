@@ -6,6 +6,10 @@ echo "🚀 Entrypoint Symfony : démarrage..."
 export APP_ENV=prod
 export APP_DEBUG=0
 
+# Lancer les migrations pour créer les tables
+echo "🧱 Exécution des migrations Doctrine..."
+php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction --env=prod || true
+
 # Nettoyer le cache Symfony (optionnel mais propre)
 if [ -f /var/www/html/bin/console ]; then
   echo "🎯 Symfony détecté, on nettoie le cache..."
