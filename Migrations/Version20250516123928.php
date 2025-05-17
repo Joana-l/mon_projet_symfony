@@ -14,12 +14,12 @@ final class Version20250516123928 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Création des tables + ajout d’un utilisateur admin';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
+        // Création des tables
         $this->addSql('CREATE TABLE realisation (id SERIAL NOT NULL, user_id INT NOT NULL, titre VARCHAR(255) NOT NULL, description TEXT NOT NULL, image VARCHAR(255) DEFAULT NULL, date_current TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_EAA5610EA76ED395 ON realisation (user_id)');
         $this->addSql('CREATE TABLE "user" (id SERIAL NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
@@ -40,14 +40,18 @@ final class Version20250516123928 extends AbstractMigration
         $this->addSql('DROP TRIGGER IF EXISTS notify_trigger ON messenger_messages;');
         $this->addSql('CREATE TRIGGER notify_trigger AFTER INSERT OR UPDATE ON messenger_messages FOR EACH ROW EXECUTE PROCEDURE notify_messenger_messages();');
         $this->addSql('ALTER TABLE realisation ADD CONSTRAINT FK_EAA5610EA76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql("INSERT INTO \"user\" (email, roles, password) VALUES ( 'aleaurulleau33@hotmail.com','[\"ROLE_ADMIN\"]','\$2y\$13\$VtixjrsUpzvYbpRe0wnHaOL1HIs0R7YjRZ6CkI6bsA5zNKKsKn1ju')");
-           
+
+        // Ajout d'un utilisateur admin
+        $this->addSql("INSERT INTO \"user\" (email, roles, password) VALUES (
+            'aleaurulleau33@hotmail.com',
+            '[\"ROLE_ADMIN\"]',
+            '\$2y\$13\$VtixjrsUpzvYbpRe0wnHaOL1HIs0R7YjRZ6CkI6bsA5zNKKsKn1ju'
+        )");
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
+        // Suppression des tables
         $this->addSql('ALTER TABLE realisation DROP CONSTRAINT FK_EAA5610EA76ED395');
         $this->addSql('DROP TABLE realisation');
         $this->addSql('DROP TABLE "user"');
