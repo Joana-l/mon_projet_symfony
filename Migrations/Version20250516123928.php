@@ -40,6 +40,8 @@ final class Version20250516123928 extends AbstractMigration
         $this->addSql('DROP TRIGGER IF EXISTS notify_trigger ON messenger_messages;');
         $this->addSql('CREATE TRIGGER notify_trigger AFTER INSERT OR UPDATE ON messenger_messages FOR EACH ROW EXECUTE PROCEDURE notify_messenger_messages();');
         $this->addSql('ALTER TABLE realisation ADD CONSTRAINT FK_EAA5610EA76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql("INSERT INTO \"user\" (email, roles, password) VALUES ( 'aleaurulleau33@hotmail.com','[\"ROLE_ADMIN\"]','\$2y\$13\$VtixjrsUpzvYbpRe0wnHaOL1HIs0R7YjRZ6CkI6bsA5zNKKsKn1ju')");
+           
     }
 
     public function down(Schema $schema): void
