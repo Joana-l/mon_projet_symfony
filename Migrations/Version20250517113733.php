@@ -23,7 +23,7 @@ final class Version20250517113733 extends AbstractMigration
         $this->addSql("INSERT INTO \"user\" (email, roles, password) VALUES (
             'aleaurulleau33@hotmail.com',
             '[\"ROLE_ADMIN\"]',
-            '\$2y\$13\$VtixjrsUpzvYbpRe0wnHaOL1HIs0R7YjRZ6CkI6bsA5zNKKsKn1ju'
+            '\$2y\$13\$xjLIrU.sEx3upO3LRXmSC.84oZMbPv0ZDVmDP1Mv.GPkhiyC.9nwG'
         )");
 
     }
