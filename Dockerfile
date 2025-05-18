@@ -21,6 +21,9 @@ RUN echo '<VirtualHost *:80>\n\
 
 COPY . .
 
+# Copie forcée du fichier de config prod
+COPY .env.local.php .env.local.php
+
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # ❌ Pas de scripts auto
