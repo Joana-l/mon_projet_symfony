@@ -2,40 +2,42 @@ FROM php:8.2-apache-bullseye
 
 RUN apt-get update && apt-get install -y \
     git unzip libicu-dev libzip-dev libpq-dev \
-    && docker-php-ext-install intl pdo pdo_pgsql zip \
+    && docker-php-ext-install intl pdo pdo_pgsql zip session opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN a2enmod rewrite
+RUN a2enmod rewrite headers
 
 WORKDIR /var/www/html
 
-# Config Apache
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot /var/www/html/public\n\
-    <Directory /var/www/html/public>\n\
-        Options Indexes FollowSymLinks\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+# ✅ Configuration Apache (plus propre avec EOF)
+RUN cat <<EOF > /etc/apache2/sites-available/000-default.conf
+<VirtualHost *:80>
+    DocumentRoot /var/www/html/public
+    <Directory /var/www/html/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    <IfModule mod_headers.c>
+        Header always edit Set-Cookie ^(.*)$ "\$1; HttpOnly; Secure; SameSite=Lax"
+    </IfModule>
+</VirtualHost>
+EOF
 
 COPY . .
 
-# Copie forcée du fichier de config prod
 COPY .env.local.php .env.local.php
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# ❌ Pas de scripts auto
 RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
-# ✅ Crée tous les sous-dossiers attendus et donne les bons droits
 RUN mkdir -p var/cache var/log
 RUN chown -R www-data:www-data var vendor
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
 
 EXPOSE 80
