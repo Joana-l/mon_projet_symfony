@@ -4,9 +4,9 @@
 
 return array (
   'APP_ENV' => 'prod',
-  'APP_DEBUG' => '1',
-  'DATABASE_URL' => "postgresql://symfony_db_user:0xco7Vm2gv6B6vReyx4zG9SVKhSOuJQ4@dpg-d0gv67k9c44c7395ug0g-a/symfony_db",
+  'APP_DEBUG' => '0',
+  'APP_SECRET' => '9e8b23fba9cd13aa1b8578dfb1ab75cc02f7ab33c53c4b5ff498f22f8ce9c6c2',
+  'DATABASE_URL' => 'postgresql://symfony_db_user:0xco7Vm2gv6B6vReyx4zG9SVKhSOuJQ4@dpg-d0gv67k9c44c7395ug0g-a/symfony_db',
   'MESSENGER_TRANSPORT_DSN' => 'doctrine://default?auto_setup=0',
   'MAILER_DSN' => 'smtp://8a5b0a002@smtp-brevo.com:9QDxfUSyaqpcmdA7@smtp-relay.brevo.com:587',
-  'APP_SECRET' => '9e8b23fba9cd13aa1b8578dfb1ab75cc02f7ab33c53c4b5ff498f22f8ce9c6c2',
 );
