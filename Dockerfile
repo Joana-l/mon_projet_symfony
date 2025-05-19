@@ -19,9 +19,10 @@ RUN cat <<EOF > /etc/apache2/sites-available/000-default.conf
         Require all granted
     </Directory>
 
-    <IfModule mod_headers.c>
-        Header always edit Set-Cookie ^(.*)$ "\$1; HttpOnly; Secure; SameSite=Lax"
-    </IfModule>
+   <IfModule mod_headers.c>
+        Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; SameSite=Lax"
+   </IfModule>
+
 </VirtualHost>
 EOF
 
