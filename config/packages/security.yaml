@@ -25,7 +25,7 @@ security:
             logout:
                 path: app_logout
             access_denied_url: /login        
-            custom_authenticator: App\Security\YAuthenticator
+            
 
             remember_me:
                 secret: '%kernel.secret%'
