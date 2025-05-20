@@ -10,6 +10,10 @@ export APP_DEBUG=0
 # ✅ S'assurer que les dossiers nécessaires existent
 mkdir -p var/cache var/log
 
+echo "🧹 Suppression de l'historique des migrations..."
+psql "$DATABASE_URL" -f /var/www/html/sql/reset_sql.sql || true
+
+
 # 🧱 Lancer les migrations Doctrine (pour PostgreSQL sur Render)
 echo "🧱 Exécution des migrations Doctrine..."
 php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction --env=prod || true
