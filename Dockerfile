@@ -1,7 +1,7 @@
 FROM php:8.2-apache-bullseye
 
 RUN apt-get update && apt-get install -y \
-    git unzip libicu-dev libzip-dev libpq-dev \
+    git unzip libicu-dev libzip-dev libpq-dev postgresql-client \
     && docker-php-ext-install intl pdo pdo_pgsql zip session opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
