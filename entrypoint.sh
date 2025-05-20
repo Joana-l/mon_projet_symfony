@@ -18,15 +18,17 @@ psql "$DATABASE_URL" -f /var/www/html/sql/reset_sql.sql || true
 echo "🧱 Exécution des migrations Doctrine..."
 php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction --env=prod || true
 
-echo "👤 Insertion de l'admin en base si inexistant..."
+echo "👤 Insertion de l'utilisateur admin..."
+psql "$DATABASE_URL" <<EOF
+INSERT INTO "user" (email, roles, password)
+VALUES (
+  'aleaurulleau33@hotmail.com',
+  '["ROLE_ADMIN"]',
+  '\$2y\$13\$0IWENipVZmnIur.7i75vzen6amLhJi6FI7o1.uFdo3YLRaW4F8rNG'
+)
+ON CONFLICT (email) DO NOTHING;
+EOF
 
-php /var/www/html/bin/console doctrine:query:sql "
-INSERT INTO \"user\" (email, roles, password)
-SELECT 'aleaurulleau33@hotmail.com', '[\"ROLE_ADMIN\"]', '\$2y\$13\$0IWENipVZmnIur.7i75vzen6amLhJi6FI7o1.uFdo3YLRaW4F8rNG'
-WHERE NOT EXISTS (
-  SELECT 1 FROM \"user\" WHERE email = 'aleaurulleau33@hotmail.com'
-);
-" || true
 
 # 🎯 Nettoyer le cache Symfony
 if [ -f /var/www/html/bin/console ]; then
