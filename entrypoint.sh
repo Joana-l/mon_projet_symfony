@@ -24,6 +24,17 @@ fi
 echo "🔧 Fix des droits sur var/ et vendor/"
 chown -R www-data:www-data var vendor
 
+echo "👤 Insertion de l'admin en base si inexistant..."
+
+php /var/www/html/bin/console doctrine:query:sql "
+INSERT INTO \"user\" (email, roles, password)
+SELECT 'aleaurulleau33@hotmail.com', '[\"ROLE_ADMIN\"]', '\$2y\$13\$0IWENipVZmnIur.7i75vzen6amLhJi6FI7o1.uFdo3YLRaW4F8rNG'
+WHERE NOT EXISTS (
+  SELECT 1 FROM \"user\" WHERE email = 'aleaurulleau33@hotmail.com'
+);
+" || true
+
+
 # 🌍 Lancement du serveur Apache en mode foreground
 echo "🌐 Lancement d'Apache..."
 exec apache2-foreground
