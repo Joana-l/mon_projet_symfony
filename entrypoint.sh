@@ -1,24 +1,20 @@
 #!/bin/bash
+
 set -e
 
 echo "🚀 Entrypoint Symfony : démarrage..."
 
-# ⚙️ Définir l’environnement Symfony
+# Assure que Symfony est bien en prod
 export APP_ENV=prod
 export APP_DEBUG=0
 
-# ✅ S'assurer que les dossiers nécessaires existent
-mkdir -p var/cache var/log
-
-echo "🧹 Suppression de l'historique des migrations..."
-psql "$DATABASE_URL" -f /var/www/html/sql/reset_sql.sql || true
-
-
-# 🧱 Lancer les migrations Doctrine (pour PostgreSQL sur Render)
+# 📦 Lancer les migrations Doctrine
 echo "🧱 Exécution des migrations Doctrine..."
 php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction --env=prod || true
 
-echo "👤 Insertion de l'utilisateur admin..."
+# 👤 Création d’un admin si non présent (email + mot de passe hashé)
+echo "👤 Vérification de l'admin..."
+
 psql "$DATABASE_URL" <<EOF
 INSERT INTO "user" (email, roles, password)
 VALUES (
@@ -29,18 +25,15 @@ VALUES (
 ON CONFLICT (email) DO NOTHING;
 EOF
 
-
-# 🎯 Nettoyer le cache Symfony
+# 🧹 Nettoyage du cache Symfony
 if [ -f /var/www/html/bin/console ]; then
-  echo "🧹 Nettoyage du cache Symfony..."
+  echo "🎯 Symfony détecté, on nettoie le cache..."
   php /var/www/html/bin/console cache:clear --env=prod --no-warmup || true
 fi
 
-# 🔐 Fixer les permissions pour www-data (Apache)
-echo "🔧 Fix des droits sur var/ et vendor/"
-chown -R www-data:www-data var vendor
+# 🔧 Permissions
+chown -R www-data:www-data var
 
-
-# 🌍 Lancement du serveur Apache en mode foreground
+# 🌐 Démarrage Apache
 echo "🌐 Lancement d'Apache..."
 exec apache2-foreground
