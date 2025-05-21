@@ -1,39 +1,33 @@
 #!/bin/bash
 
-set -e
+set -e  # Stoppe le script si une commande échoue
 
 echo "🚀 Entrypoint Symfony : démarrage..."
 
-# Assure que Symfony est bien en prod
+# Force le mode prod
 export APP_ENV=prod
 export APP_DEBUG=0
 
-# 📦 Lancer les migrations Doctrine
-echo "🧱 Exécution des migrations Doctrine..."
-php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction --env=prod || true
+# 🧱 Exécution des migrations (sécurisée)
+echo "🧱 Lancement des migrations Doctrine..."
 
-# 👤 Création d’un admin si non présent (email + mot de passe hashé)
-echo "👤 Vérification de l'admin..."
+if php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction --env=prod; then
+  echo "✅ Migrations effectuées avec succès."
+else
+  echo "❌ Erreur lors des migrations. Arrêt du déploiement."
+  exit 1
+fi
 
-psql "$DATABASE_URL" <<EOF
-INSERT INTO "user" (email, roles, password)
-VALUES (
-  'aleaurulleau33@hotmail.com',
-  '["ROLE_ADMIN"]',
-  '\$2y\$13\$0IWENipVZmnIur.7i75vzen6amLhJi6FI7o1.uFdo3YLRaW4F8rNG'
-)
-ON CONFLICT (email) DO NOTHING;
-EOF
 
 # 🧹 Nettoyage du cache Symfony
 if [ -f /var/www/html/bin/console ]; then
   echo "🎯 Symfony détecté, on nettoie le cache..."
-  php /var/www/html/bin/console cache:clear --env=prod --no-warmup || true
+  php /var/www/html/bin/console cache:clear --env=prod --no-warmup
 fi
 
 # 🔧 Permissions
 chown -R www-data:www-data var
 
-# 🌐 Démarrage Apache
+# 🌐 Démarrage du serveur web
 echo "🌐 Lancement d'Apache..."
 exec apache2-foreground

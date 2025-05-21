@@ -5,7 +5,7 @@
 return array (
   'APP_ENV' => 'prod',
   'APP_DEBUG' => '0',
-  'DATABASE_URL' => 'postgresql://symfony_pro_clean_user:vlyiRhOEQEGmxrEz5OeojQ6oQbO8ll2Q@dpg-d0m9mfhr0fns73ce99k0-a/symfony_pro_clean',
+  'DATABASE_URL' => "postgresql://symfony_pro_clean_user:vlyiRhOEQEGmxrEz5OeojQ6oQbO8ll2Q@dpg-d0m9mfhr0fns73ce99k0-a.oregon-postgres.render.com/symfony_pro_clean?sslmode=require",
   'MESSENGER_TRANSPORT_DSN' => 'doctrine://default?auto_setup=0',
   'MAILER_DSN' => 'smtp://8a5b0a002@smtp-brevo.com:9QDxfUSyaqpcmdA7@smtp-relay.brevo.com:587',
   'APP_SECRET' => '9e8b23fba9cd13aa1b8578dfb1ab75cc02f7ab33c53c4b5ff498f22f8ce9c6c2',
