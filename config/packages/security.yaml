@@ -20,7 +20,7 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                csrf_token_generator: security.csrf.token_manager
+                csrf_token_id: authenticate
                 default_target_path: /admin
                 enable_csrf: true
             logout:
