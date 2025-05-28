@@ -3,7 +3,7 @@ vich_uploader:
     mappings:
         realisation_images:
             uri_prefix:  /uploads/realisation
-            upload_destination: '%kernel.project_dir%/var/uploads/realisation'
+            upload_destination: '%kernel.project_dir%/public/uploads/realisation'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true  # Active la suppression automatique
             delete_on_update: true

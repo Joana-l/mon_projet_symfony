@@ -28,17 +28,13 @@ fi
 # 🔧 Permissions
 chown -R www-data:www-data var
 
-# 📁 Création du dossier d'uploads utilisé par VichUploaderBundle
-echo "📁 Création du dossier var/uploads/realisation..."
-mkdir -p /var/www/html/var/uploads/realisation
+# 📁 Création du dossier upload directement dans public
+echo "📁 Création du dossier public/uploads/realisation..."
+mkdir -p /var/www/html/public/uploads/realisation
 
-# 🛡️ Autoriser l'écriture dans ce dossier
-echo "🔧 Correction des permissions sur var/uploads..."
-chmod -R 775 /var/www/html/var/uploads
+# 🛡️ Permissions max (temporaire mais efficace)
+chmod -R 777 /var/www/html/public/uploads
 
-# 🔗 Création du lien symbolique
-echo "🔗 Création du lien symbolique public/uploads vers var/uploads..."
-ln -sf ../../var/uploads /var/www/html/public/uploads
 
 # 🌐 Démarrage du serveur web
 echo "🌐 Lancement d'Apache..."
