@@ -8,6 +8,8 @@
 !/public/bundles/easyadmin/
 /var/
 /vendor/
+/public/upload_runtime/
+
 ###< symfony/framework-bundle ###
 ###> phpunit/phpunit ###
 /phpunit.xml
