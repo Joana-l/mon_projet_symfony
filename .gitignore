@@ -4,7 +4,8 @@
 + # /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
+/public/bundles/*
+!/public/bundles/easyadmin/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
