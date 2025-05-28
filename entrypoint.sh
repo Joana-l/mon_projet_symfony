@@ -32,7 +32,11 @@ chown -R www-data:www-data var
 echo "📁 Création du dossier var/uploads/realisation..."
 mkdir -p /var/www/html/var/uploads/realisation
 
-# 🔗 Création du lien symbolique pour que les fichiers soient accessibles depuis /public
+# 🛡️ Autoriser l'écriture dans ce dossier
+echo "🔧 Correction des permissions sur var/uploads..."
+chmod -R 775 /var/www/html/var/uploads
+
+# 🔗 Création du lien symbolique
 echo "🔗 Création du lien symbolique public/uploads vers var/uploads..."
 ln -sf ../../var/uploads /var/www/html/public/uploads
 
