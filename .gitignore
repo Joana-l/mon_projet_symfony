@@ -8,7 +8,9 @@
 !/public/bundles/easyadmin/
 /var/
 /vendor/
-/public/upload_runtime/
+/var/uploads/
+/public/uploads/
+
 
 ###< symfony/framework-bundle ###
 ###> phpunit/phpunit ###

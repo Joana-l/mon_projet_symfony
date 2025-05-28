@@ -42,7 +42,7 @@ class RealisationCrudController extends AbstractCrudController
     
             // Affichage de l'image dans la liste
             ImageField::new('image')
-                ->setBasePath('/upload_runtime/realisation')
+                ->setBasePath('/uploads/realisation')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
                 ->setRequired(false) 
                 ->onlyOnIndex(),
