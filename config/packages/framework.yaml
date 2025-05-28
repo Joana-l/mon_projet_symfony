@@ -8,7 +8,10 @@ framework:
         cookie_httponly: true 
         cookie_samesite: lax
     
+ # ✅ CSRF protection (à ce niveau, pas dans session)
     csrf_protection: true
+
+    # ✅ Redirection automatique HTTP → HTTPS
     enforce_ssl: true
 
     #esi: true
