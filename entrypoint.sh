@@ -32,8 +32,10 @@ chown -R www-data:www-data var
 echo "📁 Création du dossier public/uploads/realisation..."
 mkdir -p /var/www/html/public/uploads/realisation
 
-# 🛡️ Permissions max (temporaire mais efficace)
-chmod -R 777 /var/www/html/public/uploads
+# 🛡️ Sécurisation des permissions
+echo "🔐 Attribution des droits sur les dossiers d'upload..."
+chown -R www-data:www-data /var/www/html/public/uploads
+chmod -R 755 /var/www/html/public/uploads
 
 
 # 🌐 Démarrage du serveur web
