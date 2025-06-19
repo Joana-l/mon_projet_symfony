@@ -28,7 +28,9 @@ Ce projet m’a permis de consolider les compétences suivantes :
 - Configuration d’une base de données et gestion des entités avec Doctrine
 - Utilisation de Git et GitHub pour le versionnage
 - Approfondissement du développement web dans un contexte professionnel
-
+- **Déploiement d’un projet Symfony en production** :
+  - sur **Render** (avec Docker et PostgreSQL)
+  - sur **Infomaniak** (hébergement mutualisé, SSH, MySQL)
 
 
 ## Technologies utilisées
@@ -67,21 +69,40 @@ php bin/console doctrine:migrations:migrate
 
 symfony server:start
 
+### 6. Deploiement en production
+Render (Docker + PostgreSQL)
+Utilisation d’un Dockerfile adapté
+Déploiement via GitHub auto
+Base de données PostgreSQL 
+Configuration .env spécifique à Render
 
+Infomaniak (hébergement mutualisé + MySQL)
+Envoi des fichiers par FTP
+Installation des dépendances via SSH (composer install)
+Base de données MySQL configurée via le manager
+Génération du mot de passe admin avec security:hash-password
+.htaccess configuré pour rediriger les routes Symfony
+Dossier cible du site : /public
 
 ## 🙋‍♀️ À propos de moi
 
-Je m'appelle Joana, je suis développeuse web, issue d'une formation **Développeur Web et Web Mobile (DWWM)**.  
-Je suis actuellement en attente de la validation de mon titre professionnel,  
-et je souhaite poursuivre mon parcours en intégrant une **formation en alternance spécialisée en PHP/Symfony**.
+Je m'appelle Joana, je suis **développeuse web diplômée**, titulaire du **titre professionnel “Développeur Web et Web Mobile (DWWM)”**.
 
-Je suis à la recherche d’une entreprise prête à m’accompagner en alternance pour continuer à progresser,  
-mettre en pratique mes compétences, et participer activement à des projets concrets.
+💻 Je me spécialise dans le développement **back-end PHP / Symfony**, avec une appétence pour :
+- la conception de back-offices avec EasyAdmin
+- la gestion de base de données avec Doctrine et MySQL
+- le déploiement web en production (Render, mutualisé via SSH)
+- l’optimisation du code et la structure MVC
 
-Rigoureuse, motivée et curieuse, j’ai particulièrement apprécié travailler sur ce projet Symfony,  
-qui m’a permis de développer des compétences solides en backend, base de données et interface d’administration.
+🎯 Je suis actuellement à la recherche :
+- d’une **alternance** en développement back-end (PHP / Symfony)
+- ou d’un **premier poste** dans une équipe technique bienveillante où je pourrai continuer à apprendre et progresser
 
-📧 Contactez-moi : [mon profil LinkedIn](https://www.linkedin.com/in/joana-laffitte-069415319/)
+Rigoureuse, autonome et motivée, j’aime comprendre le fonctionnement des outils que j’utilise, structurer proprement mes projets et livrer du code fiable.
+
+📧 Contactez-moi :
+- par email ou sur [mon profil LinkedIn](https://www.linkedin.com/in/joana-laffitte-069415319/)
+- je serais ravie d’échanger autour de vos projets !
 
 ### Remerciements
 
